@@ -558,21 +558,13 @@
     fetch(SHEET_URL, {
       method: 'POST',
       body: JSON.stringify(obj),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+      mode: 'no-cors'
     })
-    .then(res => res.json())
-    .then(res => {
-      if (res.status === 'ok') {
-        this.style.display = 'none';
-        const banner = document.getElementById('success-banner');
-        banner.style.display = 'block';
-        banner.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        throw new Error();
-      }
+    .then(() => {
+      this.style.display = 'none';
+      const banner = document.getElementById('success-banner');
+      banner.style.display = 'block';
+      banner.scrollIntoView({ behavior: 'smooth' });
     })
     .catch(() => {
       submitBtn.disabled = false;
